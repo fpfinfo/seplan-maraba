@@ -245,10 +245,16 @@
           </ul>
         </div>
       </details>
-      <details>
+      
+      
+      <details open>
         <summary>2. Proposta de Solução</summary>
         <div class="section">
           <p>Substituição por bebedouros industriais FRISBEL conforme cotação NORTE REFRIGERAÇÕES (Belém/PA):</p>
+          <div class="bebedouro-images">
+            <figure><img src="https://climario.vtexassets.com/arquivos/ids/198882-1200-auto?v=638687656321800000&width=1200&height=auto&aspect=true" alt="Bebedouro Industrial 100L RA10-12"><figcaption>RA10-12 (100L)</figcaption></figure>
+            <figure><img src="https://climario.vtexassets.com/arquivos/ids/198896/40193---40194---200L_0003_BEBEDOURO-FRISBELL-200L---2.jpg?v=638742041803730000" alt="Bebedouro Industrial 200L RA20-12"><figcaption>RA20-12 (200L)</figcaption></figure>
+          </div>
           <table>
             <thead><tr><th>Equipamento</th><th>Quantidade</th><th>Valor Unit. (R$)</th><th>Valor Total (R$)</th></tr></thead>
             <tbody>
@@ -260,6 +266,9 @@
           <p>Troca semestral de filtros: R$ 150,00/un (anual: R$ 900,00).</p>
         </div>
       </details>
+
+
+
       <details>
         <summary>3. Comparativo Econômico e ROI</summary>
         <div class="section">
@@ -294,14 +303,17 @@
       </details>
     </div>
 
-    <!-- Aba Gráficos Bebedouros -->
-    <div id="graficos-bebedouros" class="content hidden">
-      <div class="section"><canvas id="grafico3"></canvas></div>
-      <div class="section"><canvas id="grafico4"></canvas></div>
+     <!-- Aba Gráficos Bebedouros -->
+    <div id="graficos-bebedouros" class="content">
+      <div class="section" style="display:flex;align-items:center;gap:1rem;">
+        <img src="https://climario.vtexassets.com/arquivos/ids/198882-1200-auto?v=638687656321800000&width=1200&height=auto&aspect=true" alt="RA10-12" style="width:60px;height:auto;">
+        <canvas id="grafico3"></canvas>
+      </div>
+      <div class="section" style="display:flex;align-items:center;gap:1rem;">
+        <img src="https://climario.vtexassets.com/arquivos/ids/198896/40193---40194---200L_0003_BEBEDOURO-FRISBELL-200L---2.jpg?v=638742041803730000" alt="RA20-12" style="width:60px;height:auto;">
+        <canvas id="grafico4"></canvas>
+      </div>
     </div>
-
-    <button class="btn-pdf" onclick="downloadPDF()">📥 Baixar PDF</button>
-  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
