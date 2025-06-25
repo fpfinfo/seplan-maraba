@@ -1,461 +1,345 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Estudo Técnico - Fórum de Marabá</title>
-    <style>
-      body {
-        margin: 0;
-        font-family: "Segoe UI", sans-serif;
-        background-color: #f4f6f9;
-        color: #333;
-        padding: 0;
-      }
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estudos Técnicos - Fórum de Marabá</title>
+  <style>
+    /* Base */
+    html { box-sizing: border-box; font-size: 16px; }
+    *, *::before, *::after { box-sizing: inherit; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background: #f4f6f9;
+      color: #333;
+      line-height: 1.5;
+    }
 
-      header {
-        background-color: #0a2e50;
-        color: white;
-        padding: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        flex-wrap: wrap;
-      }
+    /* Header */
+    header {
+      background: #0a2e50;
+      color: #fff;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    header img {
+      height: 3.5rem;
+      margin-right: 1rem;
+    }
+    .title-block h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
 
-      header img {
-        height: 60px;
-        margin-right: 20px;
-      }
+    /* Nav Tabs */
+    nav {
+      display: flex;
+      background: #e3e6ea;
+      position: sticky;
+      top: 3.5rem;
+      z-index: 99;
+      flex-wrap: wrap;
+    }
+    nav button {
+      flex: 1;
+      padding: 0.75rem;
+      border: none;
+      background: #e3e6ea;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.2s;
+    }
+    nav button.active,
+    nav button:hover {
+      background: #c8d4e3;
+      font-weight: bold;
+    }
 
-      .title-block {
-        display: flex;
-        flex-direction: column;
-      }
+    /* Breadcrumb */
+    .breadcrumb {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 0.5rem 1rem;
+      background: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      gap: 0.5rem;
+    }
+    .breadcrumb span { font-size: 0.9rem; }
+    .breadcrumb span+span::before {
+      content: '›';
+      margin: 0 0.5rem;
+      color: #666;
+    }
 
-      .title-block h1 {
-        margin: 0;
-        font-size: 20px;
-        font-weight: bold;
-      }
+    /* Container */
+    .container {
+      padding: 1rem;
+      max-width: 1200px;
+      margin: auto;
+    }
 
-      .title-block span {
-        font-size: 14px;
-      }
+    /* Content Panels */
+    .content { display: none; }
+    .content.active { display: block; }
 
-      nav {
-        display: flex;
-        background-color: #e3e6ea;
-        justify-content: center;
-      }
+    /* Sections */
+    .section {
+      background: #fff;
+      padding: 1rem;
+      margin-bottom: 1.25rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    details { margin-bottom: 1rem; }
+    summary {
+      cursor: pointer;
+      font-weight: bold;
+      padding: 0.75rem;
+      background: #e3e6ea;
+      border-radius: 0.25rem;
+      transition: background 0.2s;
+    }
+    summary:hover { background: #c8d4e3; }
 
-      nav button {
-        background-color: #e3e6ea;
-        border: none;
-        padding: 15px 30px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background 0.3s;
-      }
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 0.75rem;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 0.75rem;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+    th { background: #007bff; color: #fff; }
 
-      nav button:hover,
-      nav button.active {
-        background-color: #c8d4e3;
-        font-weight: bold;
-      }
+    /* PDF Button */
+    .btn-pdf {
+      position: fixed;
+      bottom: 1rem;
+      right: 1rem;
+      background: #007bff;
+      color: #fff;
+      border: none;
+      padding: 0.75rem 1.25rem;
+      border-radius: 2rem;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      transition: background 0.2s;
+      font-size: 1rem;
+    }
+    .btn-pdf:hover { background: #0056b3; }
 
-      .content {
-        padding: 30px;
-        display: none;
-      }
+    /* Canvas Charts Responsivos */
+    .section canvas {
+      width: 100% !important;
+      height: auto !important;
+    }
 
-      .content.active {
-        display: block;
-      }
-
-      .section {
-        background: white;
-        padding: 1.5rem;
-        border-radius: 8px;
-        margin-bottom: 2rem;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-      }
-
-      h1 {
-        text-align: center;
-        color: #eaeaea;
-      }
-
-      h2 {
-        text-align: center;
-        color: #004085;
-      }
-
-      h3 {
-        margin-top: 2rem;
-        color: #0056b3;
-      }
-
-      h4 {
-        margin: 1rem 0 0.5rem;
-        color: #17a2b8;
-      }
-
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 1rem;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-      }
-
-      th,
-      td {
-        border: 1px solid #ccc;
-        padding: 12px;
-        text-align: center;
-      }
-
-      th {
-        background-color: #007bff;
-        color: white;
-      }
-
-      ul {
-        margin: 0.5rem 0 1rem 1.5rem;
-      }
-
-      canvas {
-        width: 100%;
-        max-width: 100%;
-        height: 300px;
-        margin-top: 1rem;
-      }
-
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+      header { flex-direction: column; align-items: flex-start; }
+      header img { margin-bottom: 0.75rem; }
+      nav button { font-size: 0.9rem; padding: 0.5rem; }
+      .breadcrumb { font-size: 0.8rem; padding: 0.5rem; }
+      .title-block h1 { font-size: 1.25rem; }
+      th, td { font-size: 0.8rem; padding: 0.5rem; }
       .btn-pdf {
-        float: right;
-        margin-bottom: 10px;
-        padding: 10px 20px;
-        background: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
+        padding: 0.5rem 1rem;
+        bottom: 0.75rem;
+        right: 0.75rem;
+        font-size: 0.9rem;
       }
-    </style>
-  </head>
-  <body>
-    <header>
-      <div style="display: flex; align-items: center">
-        <img
-          src="https://tse3.mm.bing.net/th?id=OIP.pLX8nJ-4tvBr-DXIPNti-QAAAA&cb=iwc1"
-          alt="Logo TJPA"
-        />
-        <div class="title-block">
-          <h1>Tribunal de Justiça do Estado do Pará</h1>
-          <span
-            >SEPLAN – Secretaria de Planejamento, Coordenação e Finanças</span
-          >
+    }
+  </style>
+</head>
+
+
+<body>
+  <header>
+    <div style="display:flex;align-items:center;">
+      <img src="https://tse3.mm.bing.net/th?id=OIP.pLX8nJ-4tvBr-DXIPNti-QAAAA&cb=iwc1" alt="Logo TJPA" />
+      <div class="title-block">
+        <h1>Estudos Técnicos – Fórum de Marabá</h1>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <button class="tab-btn active" data-tab="insumos">📄 Insumos de Consumo</button>
+    <button class="tab-btn" data-tab="graficos-insumos">📊 Gráficos Insumos</button>
+    <button class="tab-btn" data-tab="bebedouros">📄 Bebedouros Industriais</button>
+    <button class="tab-btn" data-tab="graficos-bebedouros">📊 Gráficos Bebedouros</button>
+  </nav>
+
+  <div class="breadcrumb">
+    <span>Início</span><span>Insumos de Consumo</span>
+  </div>
+
+  <div class="container">
+    <!-- Aba Insumos -->
+    <div id="insumos" class="content active">
+      <details open>
+        <summary>1. Contextualização</summary>
+        <div class="section">
+          <p>Inicialmente, ressalta-se que a Comarca de Marabá foi elevada recentemente à 3ª Entrância. Opera com onze Varas, com previsão de uma 12ª unidade. A estrutura conta com CEJUSC, Centrais de Alvarás e Mandados, APEC, CAD, equipe multidisciplinar, UNAJ, Laboratório de Informática Pai d’Égua e Guarita dos Policiais, onde são fornecidos café e água aos servidores e ao público.</p>
+          <p>O Almoxarifado Regional, em prédio distinto, possui equipe própria. Essa organização atende cerca de 250 colaboradores – servidores, estagiários, terceirizados e aprendizes –, ampliando a demanda por insumos de consumo.</p>
         </div>
-      </div>
-    </header>
-
-    <nav>
-      <button class="tab-btn active" data-tab="estudo">
-        📄 Estudo Técnico - Água Mineral
-      </button>
-      <button class="tab-btn" data-tab="graficos">
-        📊 Planilhas e Gráficos - Água Mineral
-      </button>
-    </nav>
-
-    <!-- Conteúdo - P1 -->
-    <div id="estudo" class="content active">
-      <h2>Estudo Técnico – Aquisição de Bebedouros Industriais</h2>
-
-      <div class="section">
-        <h3>1. Contextualização</h3>
-        O Fórum da Comarca de Marabá atende diariamente cerca de 170 servidores,
-        além de um fluxo constante de jurisdicionados e visitantes. A unidade
-        também é responsável pelo abastecimento do Almoxarifado Regional, o que
-        amplia ainda mais a demanda hídrica.
-        <br /><br />
-        Atualmente, o fornecimento de água potável é mantido por meio da
-        aquisição mensal de 240 garrafões de água mineral de 20 litros, ao custo
-        unitário de R$ 12,00, gerando:
-        <ul>
-          <li>
-            Despesa mensal: 240 garrafões × R$ 12,00 =
-            <strong>R$ 2.880,00</strong>
-          </li>
-          <li>
-            Despesa anual estimada: R$ 2.880,00 × 12 meses =
-            <strong>R$ 34.560,00</strong>
-          </li>
-        </ul>
-        Esse modelo de fornecimento, além de onerar o orçamento público,
-        contribui para o acúmulo de resíduos plásticos e exige logística
-        constante de reposição.
-      </div>
-
-      <div class="section">
-        <h3>2. Proposta de Solução – Serviço de Suprimento de Fundos</h3>
-        Com o objetivo de proporcionar uma solução mais econômica, sustentável e
-        autônoma para o fornecimento de água potável, propõe-se a substituição
-        do atual modelo por bebedouros industriais com sistema de filtragem,
-        adequados ao alto fluxo de pessoas.
-        <br /><br />
-        A proposta inclui a aquisição de três bebedouros industriais de coluna
-        em aço inox da marca FRISBEL, conforme cotação realizada junto à empresa
-        NORTE REFRIGERAÇÕES (Belém/PA):
-        <table>
-          <thead>
-            <tr>
-              <th>Equipamento</th>
-              <th>Quantidade</th>
-              <th>Valor Unitário</th>
-              <th>Valor Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Bebedouro Industrial 100L – RA10-12</td>
-              <td>1 unidade</td>
-              <td>R$ 2.874,95</td>
-              <td>R$ 2.874,95</td>
-            </tr>
-            <tr>
-              <td>Bebedouro Industrial 200L – RA20-12</td>
-              <td>2 unidades</td>
-              <td>R$ 3.736,60</td>
-              <td>R$ 7.473,20</td>
-            </tr>
-            <tr>
-              <td colspan="3"><strong>Total estimado da aquisição</strong></td>
-              <td><strong>R$ 10.348,15</strong></td>
-            </tr>
-          </tbody>
-        </table>
-        A única despesa recorrente da solução é a troca dos filtros a cada 6
-        meses, ao custo médio de R$ 150,00 por unidade, resultando em uma
-        despesa anual de apenas R$ 900,00 com manutenção.
-      </div>
-
-      <div class="section">
-        <h3>3. Comparativo Econômico e Retorno do Investimento (ROI)</h3>
-        <ul>
-          <li>
-            <strong>Despesa atual com água mineral:</strong> R$ 34.560,00/ano
-          </li>
-          <li>
-            <strong>Despesa futura com manutenção (filtros):</strong> R$
-            900,00/ano
-          </li>
-          <li>
-            <strong>Economia líquida anual estimada:</strong> R$ 33.660,00
-          </li>
-          <li>
-            <strong>Investimento inicial na solução:</strong> R$ 10.348,15
-          </li>
-          <li>
-            <strong>Retorno do investimento (Payback):</strong> em 3,7 meses
-          </li>
-        </ul>
-      </div>
-
-      <div class="section">
-        <h3>
-          4. Ações Complementares: Campanha “Adote Seu Copo ou Garrafinha”
-        </h3>
-        <ul>
-          <li>
-            Incentivar o uso de recipientes reutilizáveis pelos servidores e
-            visitantes;
-          </li>
-          <li>Reduzir o consumo de copos plásticos descartáveis;</li>
-          <li>
-            Reforçar o compromisso com a sustentabilidade e o PLS do TJPA;
-          </li>
-          <li>
-            Contribuir para as metas do Selo CNJ Sustentável – Eixo Diamante
-            2025;
-          </li>
-          <li>
-            Possibilidade de distribuição de copos institucionais reutilizáveis.
-          </li>
-        </ul>
-      </div>
-
-      <div class="section">
-        <h3>5. Benefícios Esperados</h3>
-        <h4>Econômicos</h4>
-        <ul>
-          <li>Economia direta de R$ 33.660,00/ano;</li>
-          <li>Eliminação de despesas logísticas com reposição de garrafões.</li>
-        </ul>
-        <h4>Ambientais</h4>
-        <ul>
-          <li>Redução de 2.880 garrafões plásticos/ano;</li>
-          <li>Redução do uso de copos descartáveis.</li>
-        </ul>
-        <h4>Institucionais</h4>
-        <ul>
-          <li>Solução higiênica, moderna e contínua;</li>
-          <li>Engajamento dos servidores;</li>
-          <li>Valorização da imagem do TJPA.</li>
-        </ul>
-      </div>
-
-      <div class="section">
-        <h3>6. Conclusão</h3>
-        A proposta de aquisição de 01 bebedouro de 100L e 02 de 200L, somada à
-        campanha “Adote Seu Copo ou Garrafinha”, representa modernização,
-        economia e sustentabilidade para o Fórum da Comarca de Marabá.
-        <br /><br />
-        É uma medida de impacto imediato que reduz resíduos, elimina a
-        dependência de garrafões plásticos, gera economia pública e engaja
-        servidores em práticas sustentáveis – alinhadas ao Selo CNJ Sustentável
-        2025.
-        <br /><br />
-        <strong
-          >Este Serviço manifesta-se favorável à aprovação e execução imediata
-          da proposta.</strong
-        >
-      </div>
+      </details>
+      <details>
+        <summary>2. Proposta de Contratação via Licitação</summary>
+        <div class="section">
+          <p>Propõe-se licitar o fornecimento de café, açúcar, leite e bolacha junto a distribuidor local, visando até 20% de redução de custos, garantia de qualidade e entregas regulares.</p>
+          <table>
+            <thead>
+              <tr><th>Produto</th><th>Mensal (un)</th><th>Anual (un)</th><th>Valor Unit. (R$)</th><th>Custo Mensal Orig. (R$)</th><th>Custo Mensal 20% Off (R$)</th><th>Custo Anual Orig. (R$)</th><th>Custo Anual 20% Off (R$)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Café</td><td>160</td><td>1920</td><td>16,50</td><td>2640,00</td><td>2112,00</td><td>31680,00</td><td>25344,00</td></tr>
+              <tr><td>Açúcar</td><td>16</td><td>192</td><td>8,00</td><td>128,00</td><td>102,40</td><td>1536,00</td><td>1228,80</td></tr>
+              <tr><td>Leite</td><td>20</td><td>240</td><td>46,00</td><td>920,00</td><td>736,00</td><td>11040,00</td><td>8832,00</td></tr>
+              <tr><td>Bolacha</td><td>20</td><td>240</td><td>8,00</td><td>160,00</td><td>128,00</td><td>1920,00</td><td>1536,00</td></tr>
+              <tr><td colspan="4"><strong>Total</strong></td><td><strong>3848,00</strong></td><td><strong>3078,40</strong></td><td><strong>46176,00</strong></td><td><strong>36940,80</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+      <details>
+        <summary>3. Benefícios Esperados</summary>
+        <div class="section">
+          <ul>
+            <li>Economia de até 20% nos custos</li>
+            <li>Previsibilidade orçamentária mensal e anual</li>
+            <li>Desoneração de despesas com suprimento de fundos</li>
+            <li>Maior transparência dos gastos</li>
+            <li>Otimização dos recursos da SEPLAN</li>
+          </ul>
+        </div>
+      </details>
     </div>
 
-    <!-- Conteúdo - P2 -->
-    <div id="graficos" class="content">
-      <div class="section">
-        <h2>Gráfico 1 – Economia Anual</h2>
-        <canvas id="grafico1"></canvas>
-      </div>
-      <div class="section">
-        <h2>Gráfico 2 – Projeção Mensal</h2>
-        <canvas id="grafico2"></canvas>
-      </div>
-      <div class="section">
-        <h2>Gráfico 3 – Redução de Resíduos Plásticos</h2>
-        <canvas id="grafico3"></canvas>
-      </div>
+    <!-- Aba Gráficos Insumos -->
+    <div id="graficos-insumos" class="content hidden">
+      <div class="section"><canvas id="grafico1"></canvas></div>
+      <div class="section"><canvas id="grafico2"></canvas></div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <!-- Aba Bebedouros -->
+    <div id="bebedouros" class="content hidden">
+      <details open>
+        <summary>1. Contextualização</summary>
+        <div class="section">
+          <p>O Fórum da Comarca de Marabá atende diariamente cerca de 170 servidores, além de jurisdicionados e visitantes. A unidade também é responsável pelo Almoxarifado Regional, o que amplia a demanda hídrica.</p>
+          <ul>
+            <li>Despesa mensal: R$ 2.880,00</li>
+            <li>Despesa anual: R$ 34.560,00</li>
+          </ul>
+        </div>
+      </details>
+      <details>
+        <summary>2. Proposta de Solução</summary>
+        <div class="section">
+          <p>Substituição por bebedouros industriais FRISBEL conforme cotação NORTE REFRIGERAÇÕES (Belém/PA):</p>
+          <table>
+            <thead><tr><th>Equipamento</th><th>Quantidade</th><th>Valor Unit. (R$)</th><th>Valor Total (R$)</th></tr></thead>
+            <tbody>
+              <tr><td>Bebedouro Industrial 100L – RA10-12</td><td>1</td><td>2.874,95</td><td>2.874,95</td></tr>
+              <tr><td>Bebedouro Industrial 200L – RA20-12</td><td>2</td><td>3.736,60</td><td>7.473,20</td></tr>
+              <tr><td colspan="3"><strong>Total estimado da aquisição</strong></td><td><strong>10.348,15</strong></td></tr>
+            </tbody>
+          </table>
+          <p>Troca semestral de filtros: R$ 150,00/un (anual: R$ 900,00).</p>
+        </div>
+      </details>
+      <details>
+        <summary>3. Comparativo Econômico e ROI</summary>
+        <div class="section">
+          <ul>
+            <li>Despesa atual: R$ 34.560,00/ano</li>
+            <li>Despesa futura (manutenção): R$ 900,00/ano</li>
+            <li>Economia anual: R$ 33.660,00</li>
+            <li>Investimento inicial: R$ 10.348,15</li>
+            <li>Retorno do investimento (Payback): 3,7 meses</li>
+          </ul>
+        </div>
+      </details>
+      <details>
+        <summary>4. Ações Complementares</summary>
+        <div class="section">
+          <ul>
+            <li>Campanha “Adote Seu Copo ou Garrafinha”</li>
+            <li>Distribuição de copos reutilizáveis</li>
+            <li>Redução de copos descartáveis</li>
+          </ul>
+        </div>
+      </details>
+      <details>
+        <summary>5. Benefícios Esperados</summary>
+        <div class="section">
+          <ul>
+            <li>Modernização, economia pública e sustentabilidade</li>
+            <li>Solução higiênica, moderna e contínua</li>
+            <li>Engajamento dos servidores</li>
+          </ul>
+        </div>
+      </details>
+    </div>
 
-    <script>
-      // Alternância entre abas
-      const buttons = document.querySelectorAll(".tab-btn");
-      const contents = document.querySelectorAll(".content");
+    <!-- Aba Gráficos Bebedouros -->
+    <div id="graficos-bebedouros" class="content hidden">
+      <div class="section"><canvas id="grafico3"></canvas></div>
+      <div class="section"><canvas id="grafico4"></canvas></div>
+    </div>
 
-      buttons.forEach((btn) => {
-        btn.addEventListener("click", () => {
-          buttons.forEach((b) => b.classList.remove("active"));
-          contents.forEach((c) => c.classList.remove("active"));
-          btn.classList.add("active");
-          document.getElementById(btn.dataset.tab).classList.add("active");
-        });
+    <button class="btn-pdf" onclick="downloadPDF()">📥 Baixar PDF</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script>
+    // Controle de abas e breadcrumb
+    const tabs = document.querySelectorAll('.tab-btn');
+    const contents = document.querySelectorAll('.content');
+    const breadcrumb = document.querySelector('.breadcrumb');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        contents.forEach(c => c.classList.remove('active'));
+        contents.forEach(c => c.classList.add('hidden'));
+        tab.classList.add('active');
+        const target = document.getElementById(tab.dataset.tab);
+        target.classList.add('active');
+        target.classList.remove('hidden');
+        breadcrumb.innerHTML = `<span>Início</span><span>${tab.textContent.trim()}</span>`;
       });
-
-      // Download PDF
-      function downloadPDF() {
-        const element = document.getElementById("estudo");
-        html2canvas(element).then((canvas) => {
-          const imgData = canvas.toDataURL("image/png");
-          const pdf = new jspdf.jsPDF("p", "mm", "a4");
-          const imgProps = pdf.getImageProperties(imgData);
-          const pdfWidth = pdf.internal.pageSize.getWidth();
-          const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-          pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-          pdf.save("estudo-tecnico-maraba.pdf");
-        });
-      }
-
-      // Gráficos
-      window.onload = () => {
-        new Chart(document.getElementById("grafico1"), {
-          type: "bar",
-          data: {
-            labels: ["Água Mineral", "Bebedouros"],
-            datasets: [
-              {
-                label: "Custo Anual (R$)",
-                data: [34560, 900],
-                backgroundColor: ["#dc3545", "#28a745"],
-              },
-            ],
-          },
-          options: {
-            responsive: true,
-            plugins: {
-              title: { display: true, text: "Economia Anual Comparativa" },
-            },
-          },
-        });
-
-        new Chart(document.getElementById("grafico2"), {
-          type: "line",
-          data: {
-            labels: [
-              "Jan",
-              "Fev",
-              "Mar",
-              "Abr",
-              "Mai",
-              "Jun",
-              "Jul",
-              "Ago",
-              "Set",
-              "Out",
-              "Nov",
-              "Dez",
-            ],
-            datasets: [
-              {
-                label: "Água Mineral",
-                data: Array(12).fill(2880),
-                borderColor: "#dc3545",
-                fill: false,
-              },
-              {
-                label: "Manutenção",
-                data: [0, 0, 150, 0, 0, 150, 0, 0, 150, 0, 0, 150],
-                borderColor: "#28a745",
-                fill: false,
-              },
-            ],
-          },
-          options: {
-            responsive: true,
-            plugins: {
-              title: { display: true, text: "Projeção Mensal de Gastos (R$)" },
-            },
-          },
-        });
-
-        new Chart(document.getElementById("grafico3"), {
-          type: "pie",
-          data: {
-            labels: ["Plástico Evitado", "Plástico Gerado"],
-            datasets: [
-              {
-                data: [2880, 0],
-                backgroundColor: ["#007bff", "#6c757d"],
-              },
-            ],
-          },
-          options: {
-            responsive: true,
-            plugins: {
-              title: {
-                display: true,
-                text: "Redução de Resíduos Plásticos (garrafões/ano)",
-              },
-            },
-          },
-        });
-      };
-    </script>
-  </body>
+    });
+    // Gráficos
+    new Chart(document.getElementById('grafico1'), {type:'bar',data:{labels:['Café','Açúcar','Leite','Bolacha'],datasets:[{label:'Anual Original',data:[31680,1536,11040,1920],backgroundColor:'#007bff'},{label:'Anual c/20%',data:[25344,1228.8,8832,1536],backgroundColor:'#28a745'}]},options:{responsive:true}});
+    new Chart(document.getElementById('grafico2'), {type:'bar',data:{labels:['Café','Açúcar','Leite','Bolacha'],datasets:[{label:'Mensal Original',data:[2640,128,920,160],backgroundColor:'#007bff'},{label:'Mensal c/20%',data:[2112,102.4,736,128],backgroundColor:'#28a745'}]},options:{responsive:true}});
+    new Chart(document.getElementById('grafico3'), {type:'bar',data:{labels:['Atua','Filtros'],datasets:[{label:'Custo Anual Bebedouros',data:[34560,900],backgroundColor:['#dc3545','#28a745']}]},options:{responsive:true,title:{display:true,text:'Economia Anual Bebedouros'}}});
+    new Chart(document.getElementById('grafico4'), {type:'line',data:{labels:['Jan','Fev','Mar','Abr','Mai','Jun'],datasets:[{label:'Gasto Mensal Bebedouros',data:[2880,2880,2880,2880,2880,2880],borderColor:'#0056b3',fill:false}]},options:{responsive:true,title:{display:true,text:'Projeção Mensal Bebedouros'}}});
+    // Download PDF
+    function downloadPDF() {
+      html2canvas(document.querySelector('.container')).then(canvas => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jspdf.jsPDF('p','mm','a4');
+        const imgProps = pdf.getImageProperties(imgData);
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = imgProps.height * pdfWidth / imgProps.width;
+        pdf.addImage(imgData,'PNG',0,0,pdfWidth,pdfHeight);
+        pdf.save('estudos-tecnicos-maraba.pdf');
+      });
+    }
+  </script>
+</body>
 </html>
