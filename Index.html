@@ -8,142 +8,53 @@
     /* Base */
     html { box-sizing: border-box; font-size: 16px; }
     *, *::before, *::after { box-sizing: inherit; }
-    body {
-      margin: 0;
-      font-family: "Segoe UI", sans-serif;
-      background: #f4f6f9;
-      color: #333;
-      line-height: 1.5;
-    }
+    body { margin: 0; font-family: "Segoe UI", sans-serif; background: #f4f6f9; color: #333; line-height: 1.5; }
 
     /* Header */
-    header {
-      background: #0a2e50;
-      color: #fff;
-      padding: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    header img {
-      height: 3.5rem;
-      margin-right: 1rem;
-    }
-    .title-block h1 {
-      margin: 0;
-      font-size: 1.5rem;
-    }
+    header { background: #0a2e50; color: #fff; padding: 1rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; position: sticky; top: 0; z-index: 100; }
+    header img { height: 3.5rem; margin-right: 1rem; }
+    .title-block h1 { margin: 0; font-size: 1.5rem; }
 
     /* Nav Tabs */
-    nav {
-      display: flex;
-      background: #e3e6ea;
-      position: sticky;
-      top: 3.5rem;
-      z-index: 99;
-      flex-wrap: wrap;
-    }
-    nav button {
-      flex: 1;
-      padding: 0.75rem;
-      border: none;
-      background: #e3e6ea;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: background 0.2s;
-    }
-    nav button.active,
-    nav button:hover {
-      background: #c8d4e3;
-      font-weight: bold;
-    }
+    nav { display: flex; background: #e3e6ea; position: sticky; top: 3.5rem; z-index: 99; flex-wrap: wrap; }
+    nav button { flex: 1; padding: 0.75rem; border: none; background: #e3e6ea; cursor: pointer; font-size: 1rem; transition: background 0.2s; }
+    nav button.active, nav button:hover { background: #c8d4e3; font-weight: bold; }
 
     /* Breadcrumb */
-    .breadcrumb {
-      display: flex;
-      flex-wrap: wrap;
-      padding: 0.5rem 1rem;
-      background: #fff;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      gap: 0.5rem;
-    }
+    .breadcrumb { display: flex; flex-wrap: wrap; padding: 0.5rem 1rem; background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.1); gap: 0.5rem; }
     .breadcrumb span { font-size: 0.9rem; }
-    .breadcrumb span+span::before {
-      content: '›';
-      margin: 0 0.5rem;
-      color: #666;
-    }
+    .breadcrumb span+span::before { content: '›'; margin: 0 0.5rem; color: #666; }
 
     /* Container */
-    .container {
-      padding: 1rem;
-      max-width: 1200px;
-      margin: auto;
-    }
+    .container { padding: 1rem; max-width: 1200px; margin: auto; }
 
     /* Content Panels */
     .content { display: none; }
     .content.active { display: block; }
 
     /* Sections */
-    .section {
-      background: #fff;
-      padding: 1rem;
-      margin-bottom: 1.25rem;
-      border-radius: 0.5rem;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-    }
+    .section { background: #fff; padding: 1rem; margin-bottom: 1.25rem; border-radius: 0.5rem; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
     details { margin-bottom: 1rem; }
-    summary {
-      cursor: pointer;
-      font-weight: bold;
-      padding: 0.75rem;
-      background: #e3e6ea;
-      border-radius: 0.25rem;
-      transition: background 0.2s;
-    }
+    summary { cursor: pointer; font-weight: bold; padding: 0.75rem; background: #e3e6ea; border-radius: 0.25rem; transition: background 0.2s; }
     summary:hover { background: #c8d4e3; }
 
+    /* Bebedouro Images */
+    .bebedouro-images { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem; }
+    .bebedouro-images figure { text-align: center; margin: 0; }
+    .bebedouro-images img { max-width: 150px; border-radius: 0.25rem; }
+    .bebedouro-images figcaption { font-size: 0.85rem; margin-top: 0.25rem; }
+
     /* Tables */
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 0.75rem;
-    }
-    th, td {
-      border: 1px solid #ccc;
-      padding: 0.75rem;
-      text-align: center;
-      font-size: 0.9rem;
-    }
+    table { width: 100%; border-collapse: collapse; margin-top: 0.75rem; }
+    th, td { border: 1px solid #ccc; padding: 0.75rem; text-align: center; font-size: 0.9rem; }
     th { background: #007bff; color: #fff; }
 
     /* PDF Button */
-    .btn-pdf {
-      position: fixed;
-      bottom: 1rem;
-      right: 1rem;
-      background: #007bff;
-      color: #fff;
-      border: none;
-      padding: 0.75rem 1.25rem;
-      border-radius: 2rem;
-      cursor: pointer;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-      transition: background 0.2s;
-      font-size: 1rem;
-    }
+    .btn-pdf { position: fixed; bottom: 1rem; right: 1rem; background: #007bff; color: #fff; border: none; padding: 0.75rem 1.25rem; border-radius: 2rem; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.2); transition: background 0.2s; font-size: 1rem; }
     .btn-pdf:hover { background: #0056b3; }
 
     /* Canvas Charts Responsivos */
-    .section canvas {
-      width: 100% !important;
-      height: auto !important;
-    }
+    .section canvas { width: 100% !important; height: auto !important; }
 
     /* Mobile Responsiveness */
     @media (max-width: 768px) {
@@ -153,12 +64,7 @@
       .breadcrumb { font-size: 0.8rem; padding: 0.5rem; }
       .title-block h1 { font-size: 1.25rem; }
       th, td { font-size: 0.8rem; padding: 0.5rem; }
-      .btn-pdf {
-        padding: 0.5rem 1rem;
-        bottom: 0.75rem;
-        right: 0.75rem;
-        font-size: 0.9rem;
-      }
+      .btn-pdf { padding: 0.5rem 1rem; bottom: 0.75rem; right: 0.75rem; font-size: 0.9rem; }
     }
   </style>
 </head>
